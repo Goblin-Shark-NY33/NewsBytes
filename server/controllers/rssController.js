@@ -120,7 +120,6 @@ controllers.getTransformRSS = (req, res, next) => {
 }
 
 function normalizeRSSObj(data, category) {
-  console.log(data)
   // navigating thorugh first level of nesting. 
   const rss = data.rss;
   // sorting some of the meta data - may be useful down the road. 
@@ -129,11 +128,12 @@ function normalizeRSSObj(data, category) {
   const channel = rss.channel;
   // These are the individucal posts. 
   const items = channel.item.map(post => {
+    console.log(post);
     const newPost = {
       title: post.title,
       link: post.link,
       pubDate: post.pubDate,
-      imgURL: post['media:content']?.$?.url || null,
+      img: post['media:content']?.$ || null,
       author: post['dc:creator'],
       category: category
     }
