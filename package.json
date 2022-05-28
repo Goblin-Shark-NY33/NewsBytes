@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type": "module",
   "scripts": {
-    "start": "cross-env NODE_ENV=production node server/server.js",
+    "start": "cross-env NODE_ENV=production nodemon server/server.js",
     "build": "cross env NODE_ENV=production TEST_ENV=this_has_rendered webpack",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "concurrently \"cross-env NODE_ENV=development webpack serve --hot --open \" \"nodemon server/server.js\""
@@ -42,12 +41,15 @@
   "dependencies": {
     "axios": "^0.27.2",
     "bcrypt": "^5.0.1",
+    "connect-pg-simple": "^7.0.0",
     "cross-env": "^7.0.3",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "express-session": "^1.17.3",
+    "pg": "^8.7.3",
     "prop-types": "^15.8.1",
     "react": "^18.1.0",
-    "react-dom": "^18.1.0"
+    "react-dom": "^18.1.0",
+    "xml2js": "^0.4.23"
   }
 }
