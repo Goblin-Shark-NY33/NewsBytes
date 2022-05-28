@@ -30,6 +30,45 @@ sqlController.getUserArticles = async (req, res, next) => {
   }
 }
 
+// validate username and password
+// input: object with username property and password property
+// output: error if there is no username or if password incorrect
+// output: if username and password is correct, then return the user id
+sqlController.validateUser = async (req, res, next) => {
+  const { username, password } = req.body;
+  const values = [username, password];
+  console.log(values);
+  try {
+
+    const data = await db.query(sqlQueries.validateUser, values);
+
+    if (!data.rows.length) {
+      res.locals.validationResponse = {
+        verified: false,
+        userId: "",
+      }
+    } else {
+      console.log('This is the data coming back from the calidateUser queryy: \n', data);
+      res.locals.validationResponse = {
+        verified: true,
+        userId: data.rows[0].userID,
+      }
+      console.log(res.locals.validationResponse);
+    }
+
+    return next();
+
+  } catch (err) {
+    next({
+      log: `Error ocurred in validateUser query controller: ${err}`,
+      status: 400,
+      message: { err: 'An error ocurred in the validateUser query controller' },
+    })
+
+  }
+}
+
+
 // get a user's sources for fetch request
 // input: user
 // output: list of users html rss feed sources in html object
