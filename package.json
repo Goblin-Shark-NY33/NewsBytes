@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "start": "cross-env NODE_ENV=production node server/server.js",
     "build": "cross env NODE_ENV=production TEST_ENV=this_has_rendered webpack",
@@ -42,6 +41,7 @@
   "dependencies": {
     "axios": "^0.27.2",
     "bcrypt": "^5.0.1",
+    "connect-pg-simple": "^7.0.0",
     "cross-env": "^7.0.3",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
