@@ -51,6 +51,4 @@ sqlController.getUserArticles = async (req, res, next) => {
 // input: user id and article id
 // output: updated list of user articles with the updated "read" field
 
-
-sqlController
 module.exports = sqlController;
