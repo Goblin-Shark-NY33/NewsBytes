@@ -14,7 +14,7 @@ controllers.getTransformRSS = (req, res, next) => {
     })
     .then(data => {
       res.locals.data = normalizeRSSObj(data); 
-      next();
+      return next();
     })
     .catch (err => {
       next({
