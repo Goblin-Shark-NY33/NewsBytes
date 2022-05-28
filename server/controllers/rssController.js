@@ -1,74 +1,13 @@
 const axios = require('axios');
 const parser = new require('xml2js').Parser( {explicitArray: false});
-
+const NYTCategories = require('../static/categories').NYT
 const controllers = {};
 
 controllers.getTransformRSS = (req, res, next) => {
 
   const combiner = []
-  const categories = [
-  'Africa',
-  'Americas',
-  'ArtandDesign',
-  'Arts',
-  'AsiaPacific',
-  'Automobiles',
-  'Baseball',
-  'Books',
-  'Business',
-  'Climate',
-  'CollegeBasketball',
-  'CollegeFootball',
-  'Dance',
-  'Dealbook',
-  'DiningandWine',
-  'Economy',
-  'Education',
-  'EnergyEnvironment',
-  'Europe',
-  'FashionandStyle',
-  'Golf',
-  'Health',
-  'Hockey',
-  'HomePage',
-  'Jobs',
-  'Lens',
-  'MediaandAdvertising',
-  'MiddleEast',
-  'MostEmailed',
-  'MostShared',
-  'MostViewed',
-  'Movies',
-  'Music',
-  'NYRegion',
-  'Obituaries',
-  'PersonalTech',
-  'Politics',
-  'ProBasketball',
-  'ProFootball',
-  'RealEstate',
-  'Science',
-  'SmallBusiness',
-  'Soccer',
-  'Space',
-  'Sports',
-  'SundayBookReview',
-  'Sunday-Review',
-  'Technology',
-  'Television',
-  'Tennis',
-  'Theater',
-  'TMagazine',
-  'Travel',
-  'Upshot',
-  'US',
-  'Weddings',
-  'Well',
-  'World',
-  'YourMoney',
-  ]; 
   
-  for (const category of categories) {
+  for (const category of NYTCategories) {
     const url = `https://rss.nytimes.com/services/xml/rss/nyt/${category}.xml`
     combiner.push(axios.get(url).then(xmlRes => {
       return {
