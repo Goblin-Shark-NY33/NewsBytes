@@ -16,7 +16,8 @@ app.use(session({
     pool: pool, 
   }),
   secret: '123abc456',
-  resave: false,
+  rolling: true, 
+  resave: true,
   saveUninitialized: true,
   cookie: {
     maxAge: 1000 * 1200
