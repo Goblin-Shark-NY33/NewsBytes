@@ -39,7 +39,14 @@ controllers.getTransformRSS = (req, res, next) => {
         }, [])
       
       return next();
-    });
+    })
+    .catch (err => {
+        return next({
+          log: 'Failure in get Middleware',
+          status: 500,
+          message: {err: err.message}
+      })
+    })
   // axios.get(url)
   //   .then((response) => {
   //     const data = response.data; 
@@ -49,13 +56,7 @@ controllers.getTransformRSS = (req, res, next) => {
   //     res.locals.data = normalizeRSSObj(data); 
   //     return next();
   //   })
-  //   .catch (err => {
-  //     next({
-  //       log: 'Failure in get Middleware',
-  //       status: 500,
-  //       message: {err: err.message}
-  //   })
-  // })
+  //   
 }
 
 function normalizeRSSObj(data, category) {
