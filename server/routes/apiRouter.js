@@ -13,7 +13,7 @@ Router.get('/',
 
 
 Router.post('/login',
-  pgContorller.validateUser,
+  // pgContorller.validateUser,
   (req, res) => {
   return res.status(200).send('user verifed');
 })
