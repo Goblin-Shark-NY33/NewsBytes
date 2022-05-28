@@ -37,11 +37,25 @@ sqlController.getUserArticles = async (req, res, next) => {
 sqlController.validateUser = async (req, res, next) => {
   const { username, password } = req.body;
   const values = [username, password];
+  console.log(values);
   try {
 
     const data = await db.query(sqlQueries.validateUser, values);
-    console.log('This is the data coming back from the calidateUser query: \n', data);
-    res.locals.queryResponse = data.rows;
+
+    if (!data.rows.length) {
+      res.locals.validationResponse = {
+        verified: false,
+        userId: "",
+      }
+    } else {
+      console.log('This is the data coming back from the calidateUser queryy: \n', data);
+      res.locals.validationResponse = {
+        verified: true,
+        userId: data.rows[0].userID,
+      }
+      console.log(res.locals.validationResponse);
+    }
+
     return next();
 
   } catch (err) {
