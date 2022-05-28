@@ -1,14 +1,24 @@
 const express = require('express');
-const apiController = require('../controllers/rssController')
-const Router = express.Router(); 
+const apiController = require('../controllers/rssController');
+const pgContorller = require('../controllers/postgrescontroller')
+const Router = express.Router();
 
 
 
-Router.get('/', 
+Router.get('/',
   apiController.getTransformRSS,
   (req, res) => {
-    res.status(200).json({data: res.locals.data})
+    return res.status(200).json({ data: res.locals.data })
   })
+
+
+Router.post('/login',
+  // pgContorller.validateUser,
+  (req, res) => {
+    console.log(req.session);
+    return res.status(200).json(res.locals.validationResponse);
+  })
+
 
 Router.get('/user')
 Router.post('/user')
