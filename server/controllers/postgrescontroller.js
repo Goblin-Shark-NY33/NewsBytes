@@ -46,10 +46,21 @@ sqlController.validateUser = async (req, res, next) => {
       res.locals.validationResponse = {
         verified: false,
         userId: "",
+        userName: "",
       }
+      return next({
+        log: 'Username or password are incorrect',
+        status: 500,
+        message: { err: 'Username or passwsord are incorrect' },
+      })
     } else {
       console.log('This is the data coming back from the calidateUser queryy: \n', data);
       res.locals.validationResponse = {
+        verified: true,
+        userId: data.rows[0].userID,
+        userName: data.rows[0].userName,
+      }
+      req.session.user = {
         verified: true,
         userId: data.rows[0].userID,
       }
