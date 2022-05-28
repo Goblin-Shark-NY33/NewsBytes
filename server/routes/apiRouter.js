@@ -13,7 +13,7 @@ Router.get('/',
 
 
 Router.post('/login',
-  pgContorller.validateUser,
+  // pgContorller.validateUser,
   (req, res) => {
     console.log(req.session);
     return res.status(200).json(res.locals.validationResponse);
