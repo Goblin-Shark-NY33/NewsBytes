@@ -22,7 +22,7 @@ const NYT = {
   World: ['Africa', 'Americas', 'AsiaPacific', 'Europe', 'MiddleEast', 'World'],
   Economy: ['Business', 'Economy', 'SmallBusiness', 'RealEstate', 'YourMoney', 'MediaandAdvertising', 'Dealbook', 'Jobs',],
   Arts_and_Culture: ['ArtandDesign', 'Arts', 'Dance', 'DiningandWine', 'FashionandStyle', 'Movies', 'Music', 'SundayBookReview', 'Theater', 'Television', 'Travel', 'Books'],
-  Issues: ['EnergyEnvironment', 'Politics', 'US', 'Climate', 'Education', 'Health'],
+  Issuses: ['EnergyEnvironment', 'Politics', 'US', 'Climate', 'Education', 'Health'],
   Popular: ['MostViewed', 'MostShared', 'MostEmailed'], 
   Science_and_Technology: ['PersonalTech', 'Space', 'Science', 'Technology'],
   NY: ['NYRegion',],
