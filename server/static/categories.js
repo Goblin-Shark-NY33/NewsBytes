@@ -22,7 +22,7 @@ const NYT = {
   World: ['Africa', 'Americas', 'AsiaPacific', 'Europe', 'MiddleEast', 'World'],
   Economy: ['Business', 'Economy', 'SmallBusiness', 'RealEstate', 'YourMoney', 'MediaandAdvertising', 'Dealbook', 'Jobs',],
   Arts_and_Culture: ['ArtandDesign', 'Arts', 'Dance', 'DiningandWine', 'FashionandStyle', 'Movies', 'Music', 'SundayBookReview', 'Theater', 'Television', 'Travel', 'Books'],
-  Issues: ['EnergyEnvironment', 'Politics', 'US', 'Climate', 'Education', 'Health'],
+  Issuses: ['EnergyEnvironment', 'Politics', 'US', 'Climate', 'Education', 'Health'],
   Popular: ['MostViewed', 'MostShared', 'MostEmailed'], 
   Science_and_Technology: ['PersonalTech', 'Space', 'Science', 'Technology'],
   NY: ['NYRegion',],
@@ -44,15 +44,25 @@ const WSJ = {
   World: ['RSSWorldNews'],
   Arts_and_Culture: ['RSSLifestyle'],
   Miscellaneous: [ 'RSSOpinion',]
- }
+}
+ 
+// base url https://www.wired.com/feed/${category}/latest/rss
+const Wired = {
+  Science_and_Technology: ['tag/ai', 'category/backchannel', 'category/security', 'category/science', 'category/gear', 'tag/ai'],
+  Miscellaneous: ['category/ideas'],
+  Arts_and_Culture: ['category/culture'],
+  Economy: ['category/business']
+}
 
 
 const NYTSource = new Source('New York Times', { url: 'https://rss.nytimes.com/services/xml/rss/nyt/', extension: '.xml' }, NYT);
 const WSJSource = new Source('Wall Street Journal', { url: 'https://feeds.a.dj.com/rss/', extension: '.xml' }, WSJ);
-const IGNSource = new Source('IGN', { url: 'http://feeds.feedburner.com/ign/'}, IGN);
+const IGNSource = new Source('IGN', { url: 'http://feeds.feedburner.com/ign/' }, IGN);
+const WiredSource = new Source('Wired', { url: 'https://www.wired.com/feed/', extension: '/latest/rss' }, Wired);
 
 module.exports = {
   NYTSource,
   WSJSource,
-  IGNSource
+  IGNSource,
+  WiredSource
 }

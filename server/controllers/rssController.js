@@ -5,9 +5,9 @@ const controllers = {};
 
 controllers.getTransformRSS = (req, res, next) => {
   // we should probbly use query params here for search and filter. 
-  console.log(req.query.categories);
-  // if the cateogry they're searching for doesn't exist we should move on. 
-  const categories = ['Science_and_Technology'];
+  // console.log(req.query.categories);
+  // if the cateogry they're searching for doesn't exist we should move on.
+  const categories = ['Science_and_Technology', 'World', 'Economy', 'Arts_and_Culture', 'Issuses', 'Popular', 'NY', 'Miscellaneous', 'Games'];
   const combiner = []
   
 // First loop through each category they have queried
@@ -63,6 +63,7 @@ controllers.getTransformRSS = (req, res, next) => {
 
       // if the data is empty this would indicate an error in all of the queries or a lack of data. 
       if (!res.locals.data.length) throw new Error('no data was received');
+      console.log(`We served ${res.locals.data.length} articles`)
       next();
     })
     .catch(err => {
@@ -90,7 +91,18 @@ function normalizeRSSObj(data, category, source) {
         description: post.description || null,
         link: post.link || null,
         pubDate: post.pubDate || null,
-        img: post['media:content']?.$ || null,
+        img: post['media:content']?.$
+          || post['media:thumbnail']
+          ? {
+          ...post['media:thumbnail']?.$,
+            medium: 'image'
+          }
+          : {
+          url: null,
+          width: null,
+          height: null,
+          medium: null
+        },
         author: post['dc:creator'] || null,
         category: category,
         source: source
@@ -101,6 +113,8 @@ function normalizeRSSObj(data, category, source) {
     // console.log(items); 
     return items
   } catch (err) {
+    console.log(data)
+    console.log(err.message); 
     // still figuring out what the best wy to handle errors at this stage is.
     console.log(`Failure in RSS Normalization`)
     return [];
