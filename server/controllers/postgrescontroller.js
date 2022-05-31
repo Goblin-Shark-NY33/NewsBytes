@@ -104,11 +104,23 @@ sqlController.addSource = async (req, res, next) => {
 sqlController.getSources = async (req, res, next) => {
   const { sources } = req.body;
   try {
-    const data = await db.query(sqlQueries.getCategorties);
+    const data = await db.query(sqlQueries.getCategorties).then(data => data.rows);
+    res.locals.data = data.reduce((acc, curr) => {
+      if (!Object.hasOwn(acc, curr.source)) {
+        acc[curr.source] = [curr.categories]
+        return acc;
+      }
 
+      acc[curr.source].push(curr.categories);
+      return acc;
+    }, {})
+    next();
   } catch (err) {
-
-
+    return next({
+      log: `Error ocurred in getSource query controller: ${err}`,
+      status: 400,
+      message: { err: 'An error ocurred in the addSource query controller' },
+    })
   }
 
 }
