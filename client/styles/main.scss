@@ -1,15 +1,29 @@
-.zeroToX{
-    font-family: Georgia,Times,Serif;
-    line-height: 1.1;
-    padding-bottom: 0.5rem;
+
+.rssFeed{
+  display:flex;
 }
 
-.info{
-  background-color: rgba(32, 30, 30, 0.75);
-    color: white;
+.zeroToX{
+    font-family: Georgia,Times,Serif;
+    padding-bottom: 0.5rem;
+    color: black;
     padding: 0.3125rem 0.9375rem;
-    bottom: 0;
-    height: auto;
-    width: auto;
-    position: absolute;
+  }
+
+.title{
+    color: black;
+  line-height: 1.1;
+  padding-bottom: 0.5rem;
+  font-family: Georgia,Times,Serif;
+}
+
+
+.author{
+    color: white;
+    padding: 0.3125rem .9375rem;
+}
+.pubDate{
+  background-color: rgba(32, 30, 30, 0.75);
+  color: white;
+  padding: 0.3125rem 0.9375rem;
 }
