@@ -9,6 +9,8 @@ const app = express();
 const port = 3000;
 const apiRouter = require('./routes/apiRouter');
 
+app.set('query parser', 'simple');
+
 //using express json() so we have access to the body
 app.use(express.json());
 app.use(session({
