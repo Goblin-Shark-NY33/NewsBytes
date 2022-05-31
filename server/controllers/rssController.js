@@ -94,7 +94,7 @@ function normalizeRSSObj(data, category, source) {
         img: post['media:content']?.$
           || post['media:thumbnail']
           ? {
-          ...post['media:thumbnail'].$,
+          ...post['media:thumbnail']?.$,
             medium: 'image'
           }
           : {
@@ -113,6 +113,8 @@ function normalizeRSSObj(data, category, source) {
     // console.log(items); 
     return items
   } catch (err) {
+    console.log(data)
+    console.log(err.message); 
     // still figuring out what the best wy to handle errors at this stage is.
     console.log(`Failure in RSS Normalization`)
     return [];
