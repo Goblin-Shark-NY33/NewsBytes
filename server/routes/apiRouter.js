@@ -26,7 +26,7 @@ Router.get('/',
   })
 
 Router.get('/sources',
-  // pgContorller.getSources,
+  pgContorller.getSources,
   (req, res) => {
     res.status(200).json(res.locals.data)
   }

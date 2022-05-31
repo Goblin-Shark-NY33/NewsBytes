@@ -2,9 +2,7 @@ const Sources = require('../static/categories');
 
 
 function getSourcesAndCategories(sources) {
-  const output = {
-
-  }
+  const output = {};
   for (let key in sources) {
     const source = sources[key];
     const name = source.name
