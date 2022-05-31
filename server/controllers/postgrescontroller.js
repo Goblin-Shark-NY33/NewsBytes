@@ -79,6 +79,26 @@ sqlController.validateUser = async (req, res, next) => {
   }
 }
 
+sqlController.addSource = async (req, res, next) => {
+
+  const { categories } = req.body;
+
+  for (let i = 0; i < categories.length; i++) {
+    try {
+      const values = categories[i];
+      const data = await db.query(sqlQueries.addSource, values);
+      console.log(data);
+      res.locals.addSourceResponse = data;
+
+    } catch (err) {
+      next({
+        log: `Error ocurred in addSource query controller: ${err}`,
+        status: 400,
+        message: { err: 'An error ocurred in the addSource query controller' },
+      })
+    }
+  }
+}
 
 // get a user's sources for fetch request
 // input: user

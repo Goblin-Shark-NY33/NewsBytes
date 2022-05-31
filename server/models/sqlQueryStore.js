@@ -9,5 +9,7 @@ module.exports = {
     "INNER JOIN PUBLIC.TBL_USER_INPUTS I ON I.USER_ID = U._ID " +
     "INNER JOIN PUBLIC.TBL_ARTICLES B ON B._ID = I._ID " +
     "WHERE I.USER_ID = $1;",
-  validateUser: "SELECT _ID AS \"userID\", USERNAME AS \"userName\" FROM PUBLIC.TBL_USERS U WHERE (U.USERNAME = $1 AND U.PASS = $2);"
+  validateUser: "SELECT _ID AS \"userID\", USERNAME AS \"userName\" FROM PUBLIC.TBL_USERS U WHERE (U.USERNAME = $1 AND U.PASS = $2);",
+  addSource: "INSERT INTO public.tbl_sources (sources_name) VALUES ($1);",
+  addCategory: "INSERT INTO public.tbl_categories (sources_id, categories_name) VALUES ($1);",
 };
