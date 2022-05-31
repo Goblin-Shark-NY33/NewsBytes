@@ -103,8 +103,10 @@ sqlController.addSource = async (req, res, next) => {
 
 sqlController.getSources = async (req, res, next) => {
   const { sources } = req.body;
+  console.log('entered the getSources');
   try {
     const data = await db.query(sqlQueries.getCategorties);
+    console.log(data);
 
   } catch (err) {
 
