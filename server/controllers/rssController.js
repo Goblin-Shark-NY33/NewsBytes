@@ -86,13 +86,23 @@ function normalizeRSSObj(data, category, source) {
     const channel = rss.channel;
     // These are the individucal posts. 
     const items = channel.item.map(post => {
-      console.log(post['media:content']?.$)
       const newPost = {
         title: post.title || null,
         description: post.description || null,
         link: post.link || null,
         pubDate: post.pubDate || null,
-        img: post['media:content']?.$ || {url: null, width: null, height: null, medium: null},
+        img: post['media:content']?.$
+          || post['media:thumbnail']
+          ? {
+          ...post['media:thumbnail'].$,
+            medium: 'image'
+          }
+          : {
+          url: null,
+          width: null,
+          height: null,
+          medium: null
+        },
         author: post['dc:creator'] || null,
         category: category,
         source: source
