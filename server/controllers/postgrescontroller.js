@@ -82,12 +82,13 @@ sqlController.validateUser = async (req, res, next) => {
 sqlController.addSource = async (req, res, next) => {
 
   const { categories } = req.body;
+  console.log(categories);
 
   for (let i = 0; i < categories.length; i++) {
     try {
-      const values = categories[i];
+      const values = [categories[i]];
       const data = await db.query(sqlQueries.addSource, values);
-      console.log(data);
+      console.log('return from database when tryuing to add sources: ', data);
       res.locals.addSourceResponse = data;
 
     } catch (err) {
