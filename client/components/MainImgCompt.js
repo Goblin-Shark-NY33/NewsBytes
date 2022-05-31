@@ -14,9 +14,7 @@ const defaultimg = "https://preview.redd.it/97qxyric0i351.jpg?auto=webp&s=4b3dd1
 export default function MainImgCompt(props) {
 
   const [articles, setArticles] = React.useState(null)
-
   console.log(articles)
-
   React.useEffect(() => {
     axios.get(myUrl, config)
       .then((res => {
@@ -25,50 +23,32 @@ export default function MainImgCompt(props) {
       }))
 
   }, []);
-
+  // category: "Baseball"
   const htmlIMG = []
-  // let allImgs = [] // Array we're storing all the images from the server response 
-
   if (articles) {
     for (let i = 0; i < articles.length; i++) {
       //  Setting "carousel-item active" only to array image [0] as we need it only on the first item 
       let carosel = "carousel-item active";
-      // console.log("hi")
       (i != 0) ? carosel = "carousel-item" : "carousel-item active";
       if (!articles[i].imgURL) articles[i].imgURL = defaultimg;
       htmlIMG.push(
         <div className={carosel}>
-          <img src={articles[i].imgURL} height="400px" width="200px" className="d-block w-100" alt=".." />
+          {/* Display x out of x sources */}
+          <div className="zeroToX">{i} of {articles.length}</div>
+
+          {/* Adding image from htmlImg array */}
+          <img src={articles[i].imgURL} height="400px" width="200px" className="d-block w-100" alt={defaultimg} />
+          {/* Attatch click event to info div  */}
+          <a href={articles[i].link} target="_blank" rel="noreferrer">
+            <div className="info">
+              <div className="title">{articles[i].title}</div>
+              <div className="author">Author: {articles[i].author}</div>
+              <div className="pubDate">Date: {articles[i].pubDate}</div>
+            </div>
+          </a>
         </div>)
     }
   }
-
-
-  // URL for axios
-  // Axios get request to ggrab et the data we need from the server database
-
-  // .then((res) => {
-  //   console.log('Data we received -> ', res.data);
-  // })
-
-
-  // let allImgs = [
-  //   "https://rickandmortyapi.com/api/character/avatar/474.jpeg",
-  //   "https://rickandmortyapi.com/api/character/avatar/744.jpeg",
-  //   "https://preview.redd.it/97qxyric0i351.jpg?auto=webp&s=4b3dd19e08d67187b9ae8816f7edd6e3d48edcd9",
-  // ]
-  // const htmlIMG = []
-
-  // for (let i = 0; i < allImgs.length; i++) {
-  //   // Setting "carousel-item active" only to array image [0] as we need it only on the first item 
-  //   let carosel = "carousel-item active";
-  //   (i != 0) ? carosel = "carousel-item" : "carousel-item active";
-  //   htmlIMG.push(
-  //     <div className={carosel}>
-  //       <img src={allImgs[i]} height="400pxx" width="1000px" className="d-block w-100" alt=".." />
-  //     </div>)
-  // }
-
 
   return (
     <div className="container">
