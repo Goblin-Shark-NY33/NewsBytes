@@ -101,6 +101,18 @@ sqlController.addSource = async (req, res, next) => {
   }
 }
 
+sqlController.getSources = async (req, res, next) => {
+  const { sources } = req.body;
+  try {
+    const data = await db.query(sqlQueries.getCategorties);
+
+  } catch (err) {
+
+
+  }
+
+}
+
 // get a user's sources for fetch request
 // input: user
 // output: list of users html rss feed sources in html object

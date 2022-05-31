@@ -12,4 +12,5 @@ module.exports = {
   validateUser: "SELECT _ID AS \"userID\", USERNAME AS \"userName\" FROM PUBLIC.TBL_USERS U WHERE (U.USERNAME = $1 AND U.PASS = $2);",
   addSource: "INSERT INTO public.tbl_sources (sources_name) VALUES ($1);",
   addCategory: "INSERT INTO public.tbl_categories (sources_id, categories_name) VALUES ($1);",
+  getCategorties: "SELECT a.sources_name AS \"source\", b.categories_name AS \"categories\" FROM PUBLIC.TBL_SOURCES a INNER JOIN PUBLIC.TBL_CATEGORIES b on B.SOURCES_ID = A._ID;"
 };
