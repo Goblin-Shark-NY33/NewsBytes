@@ -14,7 +14,6 @@ const defaultimg = "https://preview.redd.it/97qxyric0i351.jpg?auto=webp&s=4b3dd1
 export default function MainImgCompt(props) {
 
   const [articles, setArticles] = React.useState(null)
-
   console.log(articles)
 
   React.useEffect(() => {
@@ -22,58 +21,56 @@ export default function MainImgCompt(props) {
       .then((res => {
         // console.log(res.data.data)
         setArticles(res.data.data)
+
       }))
 
   }, []);
-
+  // category: "Baseball"
   const htmlIMG = []
-  // let allImgs = [] // Array we're storing all the images from the server response 
-
+  const emptyimgObj = {
+    title: null,
+    type: "images",
+    url: defaultimg,
+    width: null,
+  }
   if (articles) {
     for (let i = 0; i < articles.length; i++) {
+      // console.log('!!!Articles -> ', articles[i])
       //  Setting "carousel-item active" only to array image [0] as we need it only on the first item 
       let carosel = "carousel-item active";
-      // console.log("hi")
       (i != 0) ? carosel = "carousel-item" : "carousel-item active";
-      if (!articles[i].imgURL) articles[i].imgURL = defaultimg;
+      // Sets default image when image is 
+      if (!articles[i].img) {
+        articles[i].img = emptyimgObj;
+        // console.log('!!!Articles -> ', articles[i])
+      }
       htmlIMG.push(
         <div className={carosel}>
-          <img src={articles[i].imgURL} height="400px" width="200px" className="d-block w-100" alt=".." />
+
+          <div className="rssFeed">
+            {/* Adding image from htmlImg array */}
+            <img src={articles[i].img.url} height="400px" width="200px" className="d-block w-50" alt={defaultimg} />
+            {/* Display x out of x sources */}
+            <div className="zeroToX">{i} of {articles.length}
+              {/* Attatch click event to title div  */}
+              <a href={articles[i].link} target="_blank" rel="noreferrer">
+                <div className="title">{articles[i].title}</div>
+              </a>
+              <div className="author">Author: {articles[i].author}</div>
+              <div className="description">{articles[i].description}</div>
+              {/* Convert date to regular format */}
+              <div className="pubDate">Published {articles[i].pubDate.substr(0, articles[i].pubDate.indexOf("2022"))} 2022</div>
+            </div>
+          </div>
         </div>)
+      // break;
     }
   }
 
-
-  // URL for axios
-  // Axios get request to ggrab et the data we need from the server database
-
-  // .then((res) => {
-  //   console.log('Data we received -> ', res.data);
-  // })
-
-
-  // let allImgs = [
-  //   "https://rickandmortyapi.com/api/character/avatar/474.jpeg",
-  //   "https://rickandmortyapi.com/api/character/avatar/744.jpeg",
-  //   "https://preview.redd.it/97qxyric0i351.jpg?auto=webp&s=4b3dd19e08d67187b9ae8816f7edd6e3d48edcd9",
-  // ]
-  // const htmlIMG = []
-
-  // for (let i = 0; i < allImgs.length; i++) {
-  //   // Setting "carousel-item active" only to array image [0] as we need it only on the first item 
-  //   let carosel = "carousel-item active";
-  //   (i != 0) ? carosel = "carousel-item" : "carousel-item active";
-  //   htmlIMG.push(
-  //     <div className={carosel}>
-  //       <img src={allImgs[i]} height="400pxx" width="1000px" className="d-block w-100" alt=".." />
-  //     </div>)
-  // }
-
-
   return (
     <div className="container">
-      <h1>RSSFeed</h1>
-      <div id="carouselExampleFade" className="carousel slide carousel-fade d-block w-50" data-bs-ride="carousel">
+      {/* <h1>RSSFeed</h1> */}
+      <div id="carouselExampleFade" className="carousel slide carousel-fade d-block w-100" data-bs-ride="carousel">
         <div className="carousel-inner">
           {htmlIMG}
         </div>
